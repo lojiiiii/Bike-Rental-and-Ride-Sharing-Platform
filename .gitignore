@@ -1,0 +1,11 @@
+target/
+data/
+*.zip
+.vscode/
+apache-maven-3.9.6/
+.settings/
+.project
+.classpath
+*.class
+*.log
+bin/

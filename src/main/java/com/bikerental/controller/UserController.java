@@ -3,9 +3,17 @@ package com.bikerental.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.bikerental.model.User;
+import com.bikerental.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
+
 
     @GetMapping("/")
     public String home() {
@@ -27,8 +35,9 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginProcess(String email, String password, org.springframework.ui.Model model) {
-        // Mock login credentials: admin@example.com / admin123
-        if ("admin@example.com".equals(email) && "admin123".equals(password)) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        
+        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
             return "redirect:/dashboard";
         }
         
@@ -46,6 +55,18 @@ public class UserController {
     public String profile() {
         // User profile screen
         return "profile";
+    }
+
+    @PostMapping("/users/create")
+    public String registerProcess(String name, String email, String role, String password, org.springframework.ui.Model model) {
+        // Create and save new user
+        User newUser = new User(name, email, role, password);
+        userRepository.save(newUser);
+        
+        System.out.println("User saved to database: " + email);
+        
+        model.addAttribute("message", "Registration successful! Please log in.");
+        return "login";
     }
 
     @GetMapping("/logout")
