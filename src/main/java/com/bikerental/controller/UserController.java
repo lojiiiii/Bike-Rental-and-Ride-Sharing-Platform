@@ -14,6 +14,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder passwordEncoder;
+
 
     @GetMapping("/")
     public String home() {
@@ -37,7 +40,7 @@ public class UserController {
     public String loginProcess(String email, String password, org.springframework.ui.Model model, jakarta.servlet.http.HttpSession session) {
         Optional<User> userOpt = userRepository.findByEmail(email);
         
-        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
+        if (userOpt.isPresent() && passwordEncoder.matches(password, userOpt.get().getPassword())) {
             // Save user to session
             session.setAttribute("user", userOpt.get());
             return "redirect:/dashboard";
@@ -77,8 +80,8 @@ public class UserController {
             return "register";
         }
 
-        // Create and save new user
-        User newUser = new User(name, email, role, password);
+        // Create and save new user with hashed password
+        User newUser = new User(name, email, role, passwordEncoder.encode(password));
         userRepository.save(newUser);
         
         System.out.println("User saved to database: " + email);
