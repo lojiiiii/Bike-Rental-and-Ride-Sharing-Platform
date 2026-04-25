@@ -34,10 +34,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginProcess(String email, String password, org.springframework.ui.Model model) {
+    public String loginProcess(String email, String password, org.springframework.ui.Model model, jakarta.servlet.http.HttpSession session) {
         Optional<User> userOpt = userRepository.findByEmail(email);
         
         if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
+            // Save user to session
+            session.setAttribute("user", userOpt.get());
             return "redirect:/dashboard";
         }
         
@@ -46,19 +48,35 @@ public class UserController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard() {
-        // This will be the "Available Bikes" screen
+    public String dashboard(jakarta.servlet.http.HttpSession session, org.springframework.ui.Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        
+        model.addAttribute("user", user);
         return "dashboard";
     }
 
     @GetMapping("/profile")
-    public String profile() {
-        // User profile screen
+    public String profile(jakarta.servlet.http.HttpSession session, org.springframework.ui.Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        
+        model.addAttribute("user", user);
         return "profile";
     }
 
     @PostMapping("/users/create")
     public String registerProcess(String name, String email, String role, String password, org.springframework.ui.Model model) {
+        // Basic check for existing email
+        if (userRepository.findByEmail(email).isPresent()) {
+            model.addAttribute("error", "Email already registered!");
+            return "register";
+        }
+
         // Create and save new user
         User newUser = new User(name, email, role, password);
         userRepository.save(newUser);
@@ -70,8 +88,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout() {
-        // Redirect back home for mock logout
+    public String logout(jakarta.servlet.http.HttpSession session) {
+        // Invalidate session
+        session.invalidate();
         return "redirect:/";
     }
 }

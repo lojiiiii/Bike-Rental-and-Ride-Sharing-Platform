@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,11 +39,11 @@
         <!-- Profile Header -->
         <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row items-center mb-8">
             <div class="h-24 w-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-4xl font-bold border-4 border-blue-50 shadow-inner mb-4 md:mb-0 md:mr-8">
-                JD
+                <c:out value="${fn:toUpperCase(fn:substring(user.name, 0, 1))}" />
             </div>
             <div class="text-center md:text-left flex-grow">
-                <h1 class="text-3xl font-extrabold text-gray-900">John Doe</h1>
-                <p class="text-blue-600 font-semibold mb-2">Pro Rider • Member since 2026</p>
+                <h1 class="text-3xl font-extrabold text-gray-900"><c:out value="${user.name}" /></h1>
+                <p class="text-blue-600 font-semibold mb-2"><c:out value="${user.role}" /> • Member since 2026</p>
                 <div class="flex items-center justify-center md:justify-start space-x-4">
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">Verified Account</span>
                     <span class="text-sm text-gray-500 flex items-center">
@@ -82,11 +85,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Full Name</label>
-                            <p class="text-gray-900 font-medium">Johnathan Doe</p>
+                            <p class="text-gray-900 font-medium"><c:out value="${user.name}" /></p>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Email Address</label>
-                            <p class="text-gray-900 font-medium">admin@example.com</p>
+                            <p class="text-gray-900 font-medium"><c:out value="${user.email}" /></p>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Phone Number</label>
@@ -94,7 +97,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Account Role</label>
-                            <p class="text-gray-900 font-medium">Rider / Owner</p>
+                            <p class="text-gray-900 font-medium"><c:out value="${user.role}" /></p>
                         </div>
                     </div>
                 </div>
