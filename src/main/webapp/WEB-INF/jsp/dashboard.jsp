@@ -75,92 +75,46 @@
         <!-- Bike Marketplace Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             
-            <!-- Bike Card 1: Electric -->
-            <div class="bike-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group cursor-pointer">
-                <div class="relative overflow-hidden h-56">
-                    <img src="/images/electric_bike.png" alt="Electric Bike" class="bike-image w-full h-full object-cover transition-transform duration-500">
-                    <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">Electric</div>
-                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm">
-                        <svg class="h-5 w-5 text-gray-400 hover:text-red-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">VoltGlide X1</h3>
-                        <div class="flex items-center bg-green-50 px-2 py-0.5 rounded">
-                            <span class="text-green-700 text-xs font-bold">4.9</span>
-                            <svg class="h-3 w-3 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <c:forEach var="bike" items="${bikes}">
+                <!-- Dynamic Bike Card -->
+                <div class="bike-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group cursor-pointer">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="${bike.imagePath}" alt="${bike.name}" class="bike-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute top-4 left-4 ${bike.type == 'Electric' ? 'bg-blue-600' : bike.type == 'Mountain' ? 'bg-orange-600' : 'bg-purple-600'} text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">
+                            ${bike.type}
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm">
+                            <svg class="h-5 w-5 text-gray-400 hover:text-red-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 flex items-center">
-                        <svg class="h-4 w-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        Downtown Hub
-                    </p>
-                    <div class="flex items-center justify-between border-t pt-4">
-                        <div class="flex items-baseline">
-                            <span class="text-2xl font-extrabold text-blue-600">$12</span>
-                            <span class="text-gray-500 text-sm font-medium ml-1">/hr</span>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">${bike.name}</h3>
+                            <div class="flex items-center bg-green-50 px-2 py-0.5 rounded">
+                                <span class="text-green-700 text-xs font-bold">4.8</span>
+                                <svg class="h-3 w-3 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
                         </div>
-                        <button class="bg-gray-50 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-300">Rent Now</button>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center">
+                            <svg class="h-4 w-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            ${bike.location}
+                        </p>
+                        <div class="flex items-center justify-between border-t pt-4">
+                            <div class="flex items-baseline">
+                                <span class="text-2xl font-extrabold text-blue-600">$<c:out value="${bike.pricePerHour}" /></span>
+                                <span class="text-gray-500 text-sm font-medium ml-1">/hr</span>
+                            </div>
+                            <button class="bg-gray-50 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-300">Rent Now</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
 
-            <!-- Bike Card 2: Mountain -->
-            <div class="bike-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group cursor-pointer">
-                <div class="relative overflow-hidden h-56">
-                    <img src="/images/mountain_bike.png" alt="Mountain Bike" class="bike-image w-full h-full object-cover transition-transform duration-500">
-                    <div class="absolute top-4 left-4 bg-orange-600 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">Mountain</div>
+            <c:if test="${empty bikes}">
+                <div class="col-span-full border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center p-8 text-center text-gray-400 min-h-[350px]">
+                    <p class="font-medium">No bikes available at the moment.</p>
                 </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">Summit Peak 500</h3>
-                        <div class="flex items-center bg-green-50 px-2 py-0.5 rounded">
-                            <span class="text-green-700 text-xs font-bold">4.7</span>
-                            <svg class="h-3 w-3 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-4 flex items-center">
-                        <svg class="h-4 w-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        North Trail Head
-                    </p>
-                    <div class="flex items-center justify-between border-t pt-4">
-                        <div class="flex items-baseline">
-                            <span class="text-2xl font-extrabold text-blue-600">$15</span>
-                            <span class="text-gray-500 text-sm font-medium ml-1">/hr</span>
-                        </div>
-                        <button class="bg-gray-50 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-300">Rent Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bike Card 3: City -->
-            <div class="bike-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group cursor-pointer">
-                <div class="relative overflow-hidden h-56">
-                    <img src="/images/city_bike.png" alt="City Bike" class="bike-image w-full h-full object-cover transition-transform duration-500">
-                    <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">City</div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">Urban Breeze v2</h3>
-                        <div class="flex items-center bg-green-50 px-2 py-0.5 rounded">
-                            <span class="text-green-700 text-xs font-bold">4.5</span>
-                            <svg class="h-3 w-3 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-4 flex items-center">
-                        <svg class="h-4 w-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        City Center Park
-                    </p>
-                    <div class="flex items-center justify-between border-t pt-4">
-                        <div class="flex items-baseline">
-                            <span class="text-2xl font-extrabold text-blue-600">$8</span>
-                            <span class="text-gray-500 text-sm font-medium ml-1">/hr</span>
-                        </div>
-                        <button class="bg-gray-50 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-300">Rent Now</button>
-                    </div>
-                </div>
-            </div>
+            </c:if>
 
             <!-- Placeholder for more bikes -->
             <div class="border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center p-8 text-center text-gray-400 hover:border-blue-300 transition group cursor-pointer min-h-[350px]">

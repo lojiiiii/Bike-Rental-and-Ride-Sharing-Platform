@@ -15,6 +15,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
+    private com.bikerental.repository.BikeRepository bikeRepository;
+
+    @Autowired
     private org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder passwordEncoder;
 
 
@@ -58,6 +61,7 @@ public class UserController {
         }
         
         model.addAttribute("user", user);
+        model.addAttribute("bikes", bikeRepository.findAll());
         return "dashboard";
     }
 
