@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment History - Velocity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: 'class', theme: { extend: { colors: { brand: { 500: '#14b8a6' } }, fontFamily: { sans: ['Outfit', 'sans-serif'] } } } }
+    </script>
+    <style type="text/tailwindcss">
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+      .glass { @apply bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200 dark:border-gray-800 shadow-sm rounded-2xl; }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen flex transition-colors duration-300">
+
+    <!-- Sidebar Admin -->
+    <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-20 flex items-center px-6 border-b border-gray-200 dark:border-gray-800">
+            <a href="../Usermanagement/index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-teal-400 to-blue-500 rounded-lg flex items-center justify-center text-white">
+                    <i data-lucide="bike" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight">Velocity Admin</span>
+            </a>
+        </div>
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <a href="../Usermanagement/user-list.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors">
+                <i data-lucide="users" class="w-5 h-5"></i> Users
+            </a>
+            <a href="../Bike management/bike-admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors">
+                <i data-lucide="bike" class="w-5 h-5"></i> Bikes
+            </a>
+            <a href="../Booking management/booking-admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors">
+                <i data-lucide="calendar" class="w-5 h-5"></i> Bookings
+            </a>
+            <a href="../Ride sharing management/ride-admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors">
+                <i data-lucide="map" class="w-5 h-5"></i> Ride Shares
+            </a>
+            <a href="payment-history.html" class="flex items-center gap-3 px-4 py-3 bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-400 rounded-xl font-medium transition-colors">
+                <i data-lucide="credit-card" class="w-5 h-5"></i> Payments
+            </a>
+            <a href="../Feedback and rating management/feedback-admin.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors">
+                <i data-lucide="star" class="w-5 h-5"></i> Feedback
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-200 dark:border-gray-800">
+            <button id="theme-toggle" class="flex w-full items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl font-medium transition-colors">
+                <i data-lucide="moon" class="w-5 h-5"></i> Toggle Theme
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 lg:p-8 w-full max-w-full overflow-hidden flex flex-col">
+        <header class="mb-8">
+            <h1 class="text-2xl font-bold tracking-tight">Payment History</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Review all system transactions and payouts.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass p-6">
+                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Total Revenue</p>
+                <p class="text-3xl font-bold text-gray-900 dark:text-white">$12,450.00</p>
+            </div>
+            <div class="glass p-6">
+                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Pending Payouts</p>
+                <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400">$840.50</p>
+            </div>
+            <div class="glass p-6">
+                <p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Transactions Today</p>
+                <p class="text-3xl font-bold text-teal-600 dark:text-teal-400">142</p>
+            </div>
+        </div>
+
+        <div class="glass flex-1 overflow-hidden flex flex-col">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
+                            <th class="py-3 px-6 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Transaction ID</th>
+                            <th class="py-3 px-6 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">User</th>
+                            <th class="py-3 px-6 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Amount</th>
+                            <th class="py-3 px-6 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                            <th class="py-3 px-6 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                            <td class="py-4 px-6 font-medium text-gray-900 dark:text-white">TXN-99821</td>
+                            <td class="py-4 px-6 text-sm text-gray-600 dark:text-gray-300">Sarah Jenkins</td>
+                            <td class="py-4 px-6 font-bold text-gray-900 dark:text-white">$26.50</td>
+                            <td class="py-4 px-6">
+                                <span class="px-2 py-1 rounded bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs font-bold">SUCCESS</span>
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500">Today, 10:15 AM</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                            <td class="py-4 px-6 font-medium text-gray-900 dark:text-white">TXN-99820</td>
+                            <td class="py-4 px-6 text-sm text-gray-600 dark:text-gray-300">Michael Chen</td>
+                            <td class="py-4 px-6 font-bold text-gray-900 dark:text-white">$4.50</td>
+                            <td class="py-4 px-6">
+                                <span class="px-2 py-1 rounded bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 text-xs font-bold">PENDING</span>
+                            </td>
+                            <td class="py-4 px-6 text-sm text-gray-500">Today, 08:30 AM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
+    <script src="js/main.js"></script>
+</body>
+</html>

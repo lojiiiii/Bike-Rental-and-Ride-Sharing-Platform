@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Velocity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: 'class', theme: { extend: { colors: { brand: { 500: '#14b8a6' } }, fontFamily: { sans: ['Outfit', 'sans-serif'] } } } }
+    </script>
+    <style type="text/tailwindcss">
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+      .glass { @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-2xl; }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <nav class="sticky top-0 w-full z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-blue-500 rounded-xl flex items-center justify-center text-white shadow-lg">
+                        <i data-lucide="bike" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight">Velocity</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../Usermanagement/index.html" class="text-gray-600 dark:text-gray-300 hover:text-teal-500 transition-colors font-medium">Home</a>
+                    <a href="../Bike management/bikes.html" class="text-gray-600 dark:text-gray-300 hover:text-teal-500 transition-colors">Bikes</a>
+                    <a href="../Booking management/booking-history.html" class="text-gray-600 dark:text-gray-300 hover:text-teal-500 transition-colors">My Bookings</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                        <i data-lucide="moon" class="w-5 h-5 text-gray-600 dark:text-gray-300"></i>
+                    </button>
+                    <a href="../Usermanagement/profile.html" class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+Jenkins&background=0D8ABC&color=fff" alt="User" class="w-6 h-6 rounded-full"> Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <div class="mb-8 flex items-center gap-4">
+            <a href="../Booking management/booking.html" class="p-2 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </a>
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight">Secure Payment</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Complete your transaction to finalize the booking.</p>
+            </div>
+        </div>
+
+        <div class="glass p-6 sm:p-8">
+            <div class="flex justify-between items-end border-b border-gray-200 dark:border-gray-800 pb-6 mb-6">
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Total Amount</p>
+                    <p class="text-4xl font-bold text-gray-900 dark:text-white">$26.50</p>
+                </div>
+            </div>
+
+            <form action="payment-history.html" class="space-y-6">
+                
+                <h3 class="text-lg font-bold mb-4">Payment Method</h3>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <label class="cursor-pointer relative">
+                        <input type="radio" name="payment" value="card" class="peer sr-only" checked>
+                        <div class="p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 peer-checked:border-teal-500 peer-checked:bg-teal-50 dark:peer-checked:bg-teal-900/20 transition-all text-center">
+                            <i data-lucide="credit-card" class="w-6 h-6 mx-auto mb-2 text-gray-400 peer-checked:text-teal-500"></i>
+                            <span class="font-medium text-gray-700 dark:text-gray-300 peer-checked:text-teal-700 dark:peer-checked:text-teal-300 text-sm">Credit Card</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer relative">
+                        <input type="radio" name="payment" value="wallet" class="peer sr-only">
+                        <div class="p-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 peer-checked:border-teal-500 peer-checked:bg-teal-50 dark:peer-checked:bg-teal-900/20 transition-all text-center">
+                            <i data-lucide="wallet" class="w-6 h-6 mx-auto mb-2 text-gray-400 peer-checked:text-teal-500"></i>
+                            <span class="font-medium text-gray-700 dark:text-gray-300 peer-checked:text-teal-700 dark:peer-checked:text-teal-300 text-sm">Velocity Wallet</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Card Number</label>
+                        <input type="text" placeholder="0000 0000 0000 0000" class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all" required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Expiry Date</label>
+                            <input type="text" placeholder="MM/YY" class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">CVC</label>
+                            <input type="text" placeholder="123" class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cardholder Name</label>
+                        <input type="text" placeholder="Sarah Jenkins" class="block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 mt-6 bg-teal-500 text-white font-bold rounded-xl hover:bg-teal-600 transition-colors shadow-lg shadow-teal-500/20 text-lg flex items-center justify-center gap-2">
+                    <i data-lucide="lock" class="w-5 h-5"></i> Pay $26.50
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <script>lucide.createIcons();</script>
+    <script src="js/main.js"></script>
+</body>
+</html>
